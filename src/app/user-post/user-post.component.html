@@ -1,5 +1,5 @@
 <div class="container bg-light">
-  <button class="btn btn-info text-center" routerLink="/home">
+  <button class="btn btn-info text-center" (click)="goBack()">
     ⇐Go back
   </button>
   <div class="row align-items-center" *ngIf="userProfile; else loading_data">
