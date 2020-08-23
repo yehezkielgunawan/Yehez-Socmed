@@ -1,0 +1,26 @@
+<div class="container"  *ngIf="userList; else loading_data">
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let users of userList.data">
+      <div class="card bg-light">
+          <div class="card-header">
+            <img src="{{users.picture}}" alt="" class="card-img-top img-fluid">
+          </div>
+        <div class="card-body">
+          <h5 class="card-title">{{users.title}}. {{users.firstName}} {{users.lastName}}</h5>
+          <p class="card-text">
+            {{users.email}}
+          </p>
+          <a href="#" class="btn btn-primary" routerLink="/user/{{users.id}}">See full profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading_data>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </ng-template>

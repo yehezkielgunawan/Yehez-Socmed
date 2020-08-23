@@ -1,0 +1,153 @@
+<div class="container" *ngIf="posts && tagList; else loading_data">
+  <div class="row justify-content-center mb-5">
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Search by Tag
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" *ngFor="let tag of tagList.data" (click)="selected(tag)">{{tag}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="row" align="center">
+    <div class="card-columns col-md">
+      <div *ngFor="let post of posts.data">
+        <div class="card bg-light">
+          <div class="card-header">
+            <img
+              src="{{ post.owner.picture }}"
+              class="rounded-circle float-left avatar"
+              alt="..."
+            />
+            <b>{{ post.owner.firstName }} {{ post.owner.lastName }} </b>
+          </div>
+          <img
+            class="card-img-top img-fluid"
+            src="{{ post.image }}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <div *ngFor="let tag of post.tags" class="d-inline p-1">
+              <a href="#" class="badge badge-primary">{{ tag }}</a>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                {{ post.text }} <a href="{{ post.link }}">{{ post.link }}</a>
+              </li>
+              <li class="list-group-item">❤️{{ post.likes }} Likes</li>
+              <li class="list-group-item">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#comment-modal"
+                  (click)="getComment(post.id)"
+                  >See Comments
+                </a>
+                <br />
+                <a routerLink="/user/{{ post.owner.id }}">Get Owner Profile</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            {{ post.publishDate | date: "medium" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading_data>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="comment-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="comment-modal"
+  aria-hidden="true"
+  data-backdrop="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="comment-modal">Post Comments</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="clearComment()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center" *ngIf="comments; else loading_modal">
+        <div *ngIf="comments.data.length > 0; else kosong" class="khusus-card">
+          <div class="card" *ngFor="let comment of comments.data">
+            <div
+              class="card-header"
+              routerLink="/user/{{ comment.owner.id }}"
+              data-dismiss="modal"
+              id="card-comment"
+            >
+              <img
+                src="{{ comment.owner.picture }}"
+                alt="..."
+                class="rounded-circle avatar"
+              />{{ comment.owner.firstName }} {{ comment.owner.lastName }}
+            </div>
+            <div class="card-body">
+              {{ comment.message }}
+            </div>
+            <div class="card-footer">
+              {{ comment.publishDate | date: "medium" }}
+            </div>
+          </div>
+        </div>
+        <ng-template #kosong>
+          <div class="khusus-card">
+            <div class="card">
+              <div class="card-body">
+                No Comment
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <ng-template #loading_modal>
+        <div class="modal-body text-center">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="clearComment()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
