@@ -1,5 +1,6 @@
 # YehezSocmed
 
+The deployed version can be seen at [yehez-socmed.vercel.app](https://yehez-socmed.vercel.app) <br>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5. <br>
 Once you cloned it, follow the following steps to run in your local device :
 ```
@@ -8,7 +9,7 @@ npm i bootstrap
 npm i --save jquery popper.js
 ```
 This project is made using Angular & Bootstrap. And the data is get from [DummyAPI](https://dummyapi.io) <br>
-The API has a limit to get its data (about 500 request per 24 hours).
+The API has a limit to get its data (about 500 request per 24 hours). **So, if you get Error 429, it means that you have reached the request limit of the API. Use another account and generate new API Key**
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
