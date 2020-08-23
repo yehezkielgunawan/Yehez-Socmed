@@ -1,7 +1,14 @@
 # YehezSocmed
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
-
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5. <br>
+Once you cloned it, follow the following steps to run in your local device :
+```
+npm install
+npm i bootstrap
+npm i --save jquery popper.js
+```
+This project is made using Angular & Bootstrap. And the data is get from [DummyAPI](https://dummyapi.io) <br>
+The API has a limit to get its data (about 500 request per 24 hours).
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
